@@ -15,7 +15,7 @@ import Decimal from 'decimal.js';
 import clsx from 'clsx';
 
 export default function DashboardPage() {
-  const { prices, exchangeRates, isTestMode } = useMarketDataContext();
+  const { prices, exchangeRates, isTestMode, scenario, scenarioDescription, tickCount } = useMarketDataContext();
   const userProfile = getInitialUserProfile();
 
   // Calculate total net worth across all currencies + investments
@@ -80,10 +80,25 @@ export default function DashboardPage() {
         <p className="text-gray-600 mt-1">Welcome back, {userProfile.name}</p>
       </div>
 
-      {/* Test Mode Indicator */}
+      {/* Test Mode / Scenario Indicator */}
       {isTestMode && (
-        <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-lg" data-testid="test-mode-banner">
-          <strong>Test Mode Active:</strong> All prices and exchange rates are frozen for deterministic testing.
+        <div className="bg-blue-100 border border-blue-400 text-blue-900 px-4 py-3 rounded-lg" data-testid="test-mode-banner">
+          <div className="flex items-center justify-between">
+            <div>
+              <strong className="text-lg">
+                {scenario ? `📊 Scenario: ${scenario.replace(/_/g, ' ').toUpperCase()}` : 'Test Mode Active'}
+              </strong>
+              <p className="text-sm mt-1">
+                {scenarioDescription || 'All prices and exchange rates are frozen for deterministic testing.'}
+              </p>
+            </div>
+            {scenario && scenario !== 'fixed' && (
+              <div className="text-right">
+                <div className="text-xs text-blue-700">Tick Count</div>
+                <div className="text-2xl font-bold" data-testid="tick-count">{tickCount}</div>
+              </div>
+            )}
+          </div>
         </div>
       )}
 

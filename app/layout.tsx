@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { MarketDataProvider } from '@/lib/MarketDataContext';
+import { ScenarioSelector } from '@/components/ui/ScenarioSelector';
 import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -36,7 +37,8 @@ export default function RootLayout({
                     </Link>
                   </div>
 
-                  <nav className="flex space-x-8">
+                  <div className="flex items-center gap-6">
+                    <nav className="flex space-x-8">
                     <Link
                       href="/"
                       className="text-gray-700 hover:text-primary-600 transition-colors font-medium"
@@ -73,6 +75,8 @@ export default function RootLayout({
                       Reports
                     </Link>
                   </nav>
+                  <ScenarioSelector />
+                  </div>
                 </div>
               </div>
             </header>
