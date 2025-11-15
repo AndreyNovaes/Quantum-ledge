@@ -90,9 +90,6 @@ export interface MarketDataContextType {
   prices: Record<string, MarketPrice>;
   exchangeRates: Record<string, ExchangeRate>;
   isTestMode: boolean;
-  scenario: string | null;
-  scenarioDescription: string | null;
-  tickCount: number;
   lastUpdate: Date | null;
 }
 
